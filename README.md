@@ -147,7 +147,7 @@ wms/
 
 ## 👨‍💻 Sobre el Proyecto
 
-Desarrollado por **[Tu Nombre]**
+Desarrollado por **[ZTormDev]**
 
 Este proyecto demuestra habilidades en:
 
