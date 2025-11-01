@@ -1,6 +1,5 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { Lock } from "lucide-react";
 
 const ProtectedRoute = ({ children, allowedRoles = [] }) => {
   const { isAuthenticated, user, loading } = useAuth();
@@ -21,24 +20,18 @@ const ProtectedRoute = ({ children, allowedRoles = [] }) => {
   }
 
   if (allowedRoles.length > 0 && !allowedRoles.includes(user?.role)) {
-    return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-50">
-        <div className="card max-w-md text-center">
-          <div className="text-6xl mb-4">
-            <Lock className="w-24 h-24 mx-auto text-red-600" />
-          </div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">
-            Acceso Denegado
-          </h1>
-          <p className="text-gray-600 mb-6">
-            No tienes permisos para acceder a esta sección.
-          </p>
-          <a href="/dashboard" className="btn-primary inline-block">
-            Volver al Dashboard
-          </a>
-        </div>
-      </div>
-    );
+    // Redirigir a la página apropiada según el rol del usuario
+    switch (user?.role) {
+      case "admin":
+      case "supervisor":
+        return <Navigate to="/dashboard" replace />;
+      case "operario":
+        return <Navigate to="/reception" replace />;
+      case "vendedor":
+        return <Navigate to="/products" replace />;
+      default:
+        return <Navigate to="/products" replace />;
+    }
   }
 
   return children;

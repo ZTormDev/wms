@@ -4,7 +4,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import { AuthProvider } from "./context/AuthContext";
+import { AuthProvider, useAuth } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Layout from "./components/Layout";
 import Login from "./pages/Login";
@@ -18,6 +18,25 @@ import Stock from "./pages/Stock";
 import Movements from "./pages/Movements";
 import Reports from "./pages/Reports";
 import Users from "./pages/Users";
+
+// Componente para redirigir según el rol del usuario
+const RoleBasedRedirect = () => {
+  const { user } = useAuth();
+
+  if (!user) return <Navigate to="/login" replace />;
+
+  switch (user.role) {
+    case "admin":
+    case "supervisor":
+      return <Navigate to="/dashboard" replace />;
+    case "operario":
+      return <Navigate to="/reception" replace />;
+    case "vendedor":
+      return <Navigate to="/products" replace />;
+    default:
+      return <Navigate to="/products" replace />;
+  }
+};
 
 function App() {
   return (
@@ -148,8 +167,8 @@ function App() {
               }
             />
 
-            {/* Redirección por defecto */}
-            <Route index element={<Navigate to="/dashboard" replace />} />
+            {/* Redirección por defecto basada en rol */}
+            <Route index element={<RoleBasedRedirect />} />
           </Route>
 
           {/* Redirección para rutas no encontradas */}

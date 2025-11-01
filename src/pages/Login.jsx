@@ -17,8 +17,25 @@ const Login = () => {
     setLoading(true);
 
     try {
-      await login(email, password);
-      navigate("/dashboard");
+      const response = await login(email, password);
+
+      // Redirigir según el rol del usuario
+      const userRole = response.user.role;
+
+      switch (userRole) {
+        case "admin":
+        case "supervisor":
+          navigate("/dashboard");
+          break;
+        case "operario":
+          navigate("/reception");
+          break;
+        case "vendedor":
+          navigate("/products");
+          break;
+        default:
+          navigate("/products");
+      }
     } catch (err) {
       setError(err.message || "Error al iniciar sesión");
     } finally {
@@ -39,7 +56,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-600 to-primary-800 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-primary-600 to-primary-800 px-4">
       <div className="max-w-md w-full">
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-white rounded-full mb-4">
