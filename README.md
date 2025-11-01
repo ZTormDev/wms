@@ -8,7 +8,7 @@ Sistema completo de gestión de almacenes desarrollado con React, Tailwind CSS y
 
 ## 🚀 Demo
 
-[Ver Proyecto en Vivo](https://tu-demo-url.com) | [Ver Código](https://github.com/tu-usuario/wms)
+[Ver Proyecto en Vivo](https://ztormdev-wms.vercel.app/)
 
 ---
 
@@ -43,27 +43,6 @@ Sistema completo de gestión de almacenes desarrollado con React, Tailwind CSS y
 - **React Router** - Navegación SPA
 - **Context API** - Gestión de estado
 - **Lucide React** - Iconos profesionales
-
----
-
-## 📦 Instalación
-
-```bash
-# Clonar repositorio
-git clone https://github.com/tu-usuario/wms.git
-cd wms
-
-# Instalar dependencias
-npm install
-
-# Iniciar servidor de desarrollo
-npm run dev
-
-# Build para producción
-npm run build
-```
-
-El proyecto estará disponible en `http://localhost:5173`
 
 ---
 
